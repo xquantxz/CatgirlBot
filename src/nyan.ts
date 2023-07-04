@@ -25,7 +25,7 @@ export class NyanClient extends Client {
 
             let image = new AttachmentBuilder(await get_catgirl());
             chan.send({files: [image]});
-        }, 1000*60*5)
+        }, 1000*60*10)
     }
 
     load_commands(commandDir: string) {
