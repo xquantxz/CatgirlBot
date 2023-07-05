@@ -4,7 +4,7 @@ import * as path from 'node:path'
 import * as fs from 'node:fs'
 
 import { NyanCommand } from './command';
-import { get_catgirl } from './catgirl';
+import { get_catgirl_image } from './catgirl';
 
 export class NyanClient extends Client {
     commands: Collection<String, Function>
@@ -23,7 +23,7 @@ export class NyanClient extends Client {
                 return
             }
 
-            let image = new AttachmentBuilder(await get_catgirl());
+            let image = new AttachmentBuilder(await get_catgirl_image());
             chan.send({files: [image]});
         }, 1000*60*10)
     }

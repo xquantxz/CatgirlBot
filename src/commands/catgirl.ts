@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, CommandInteraction, EmbedBuilder, Colors } from "discord.js"
-import { get_catgirl } from "../catgirl";
+import { get_catgirl_image } from "../catgirl";
 
 module.exports = {
 	cmd: new SlashCommandBuilder()
@@ -10,7 +10,7 @@ module.exports = {
         let embed = new EmbedBuilder()
                         .setTitle("Catgirl")
                         .setColor(Colors.Green)
-                        .setImage(await get_catgirl());
+                        .setImage(await get_catgirl_image());
 
         await interaction.reply({embeds: [embed]});
 	},
