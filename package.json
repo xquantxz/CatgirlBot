@@ -2,10 +2,10 @@
   "name": "catgirlbot",
   "version": "1.0.0",
   "description": "Discord bot for GECfDO server",
-  "main": "dist\\main.js",
+  "main": "dist/main.js",
   "scripts": {
-    "start": "tsc && node dist\\main",
-    "deploy": "node dist\\deploy.js",
+    "start": "tsc && node dist/main",
+    "deploy": "node dist/deploy.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
