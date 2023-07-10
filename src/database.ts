@@ -1,5 +1,6 @@
 const Database = require('better-sqlite3');
-const { DB_PATH } = require('./constant');
+const { DB_PATH, SCHEMA_PATH } = require('./constant');
+import * as fs from "node:fs"
 
 export function new_catgirl(db, user_id: string, name: string, image_url: string) {
     let stmt = db.prepare('INSERT INTO Catgirl (owner_id, name, image_url) VALUES (?, ?, ?);').bind(user_id, name, image_url);
@@ -26,17 +27,11 @@ export function get_catgirl(db, catgirl_id: number) {
     return res;
 }
 
-function init_scheme(db) {
-    console.log("initing scheme")
-    db.exec(`
-    CREATE TABLE IF NOT EXISTS Catgirl (
-        catgirl_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        image_url TEXT,
-        exp BIGINT DEFAULT 0,
-        name TEXT NOT NULL,
-        owner_id TEXT NOT NULL
-    );`);
+function init_schema(db) {
+    console.log("initializing schema");
+    let schema: Buffer = fs.readFileSync(SCHEMA_PATH);
+    db.exec(schema.toString());
 }
 
 export let db = new Database(DB_PATH,{verbose:console.log});
-init_scheme(db)
+init_schema(db);

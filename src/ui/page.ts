@@ -37,11 +37,7 @@ export class PageUI {
 			.setCustomId('left')
             .setEmoji('⬅️')
 			.setStyle(ButtonStyle.Secondary)
-        
-        // const middlebtn = new ButtonBuilder()
-        //     .setLabel('*')
-        //     .setStyle(ButtonStyle.Secondary);
-        
+
         let rightbtn = new ButtonBuilder()
 			.setCustomId('right')
             .setEmoji('➡️')
