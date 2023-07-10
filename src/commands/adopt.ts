@@ -19,8 +19,6 @@ module.exports = {
 			return
 		}
 
-		interaction.deferReply();
-
 		let image_url = await get_catgirl_image();
 		let name = gen_catgirl_name();
 
@@ -29,6 +27,6 @@ module.exports = {
 				.setDescription("You adopted a cute neko girl!")
 				.setImage(image_url);
 		
-        await interaction.followUp({embeds: [embed]});
+        await interaction.reply({embeds: [embed]});
 	},
 };
