@@ -3,6 +3,7 @@ import { Client, Events, GatewayIntentBits, Collection } from 'discord.js';
 import * as path from 'node:path'
 
 import { NyanClient } from './nyan';
+import './database';
 const { BOT_TOKEN } = require('./constant');
 
 // Create a new client instance
