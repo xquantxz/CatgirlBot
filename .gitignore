@@ -1,0 +1,7 @@
+.*
+!.gitignore
+dist/*
+node_modules/
+*.sqlite3
+
+!dist/deploy.js
