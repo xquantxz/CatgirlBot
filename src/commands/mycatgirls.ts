@@ -20,6 +20,11 @@ async function send_reply(interaction: CommandInteraction|ButtonInteraction, pag
         });
     
         collector.on('collect', async (i: ButtonInteraction) => {
+            if (i.user.id != interaction.user.id) {
+                await i.reply({ content: "You can't click this", ephemeral: true });
+                return;
+            }
+
             if (i.customId == "left") {
                 pages.prevPage();
             } else if (i.customId == "right") {
