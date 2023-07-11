@@ -5,3 +5,10 @@ CREATE TABLE IF NOT EXISTS Catgirl (
     name TEXT NOT NULL,
     owner_id TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS Warning (
+    user_id TEXT NOT NULL,
+    guild_id TEXT NOT NULL,
+    admin_id TEXT,
+    reason TEXT
+);

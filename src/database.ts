@@ -20,11 +20,20 @@ export function get_catgirls(db, user_id: string): number[] {
 }
 
 export function get_catgirl(db, catgirl_id: number) {
-    let name = "uwu";
-    // db.get('SELECT name FROM Catgirl WHERE catgirl_id=?', catgirl_id,(err, row)=>{name=row||"uwu"});
     let stmt = db.prepare('SELECT name,image_url FROM Catgirl WHERE catgirl_id=?');
     let res = stmt.get(catgirl_id);
     return res;
+}
+
+export function get_warnings(db, guild_id: string, user_id: string) {
+    let stmt = db.prepare('SELECT * FROM Warning WHERE guild_id=? AND user_id=?');
+    let res = stmt.all(guild_id, user_id)
+    return res
+}
+
+export function add_warning(db, guild_id: string, admin_id: string, user_id: string, reason: string) {
+    let stmt = db.prepare('INSERT INTO Warning (user_id, guild_id, admin_id, reason) VALUES (?,?,?,?)').bind(user_id,guild_id,admin_id,reason)
+    stmt.run()
 }
 
 function init_schema(db) {
