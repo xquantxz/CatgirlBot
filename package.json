@@ -4,8 +4,10 @@
   "description": "Discord bot for GECfDO server",
   "main": "dist/main.js",
   "scripts": {
-    "start": "tsc && node dist/main",
+    "build": "tsc --build",
+    "start": "node dist/main",
     "deploy": "node dist/deploy.js",
+    "dev": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
