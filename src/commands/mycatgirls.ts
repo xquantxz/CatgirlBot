@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, CommandInteraction, EmbedBuilder, Colors, ComponentType, ButtonInteraction, Interaction, InteractionResponse, MessagePayload } from "discord.js"
-import {db, get_catgirl, get_catgirls, new_catgirl} from "../database";
+import { get_catgirl, get_catgirls } from "../catgirl";
 import { PageUI, PageUIContent } from "../ui/page";
 
 async function send_reply(interaction: CommandInteraction|ButtonInteraction, pages: PageUI, res?: InteractionResponse) {
@@ -41,7 +41,7 @@ module.exports = {
 		.setName('mycatgirls')
 		.setDescription('See your cute catgirls'),
 	async handler(interaction: CommandInteraction) {
-        let catgirls = get_catgirls(db, interaction.user.id);
+        let catgirls = get_catgirls(interaction.user.id);
         if (catgirls.length == 0) {
             await interaction.reply("You have no catgirls");
             return;
@@ -50,7 +50,7 @@ module.exports = {
         let content: PageUIContent[] = [];
 
         for (let id of catgirls) {
-            let data = get_catgirl(db, id);
+            let data = get_catgirl(id);
             content.push({
                 description: `**Name: ${data.name}**\nA cute catgirl indeed`,
                 image_url: data.image_url

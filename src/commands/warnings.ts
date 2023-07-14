@@ -1,6 +1,5 @@
 import { Colors, CommandInteraction, EmbedBuilder, SlashCommandBuilder, SlashCommandStringOption, SlashCommandUserOption, User } from "discord.js"
-import { db, get_warnings } from "../database";
-import { get_catgirl_image } from "../catgirl";
+import { get_warnings } from "../warning";
 
 module.exports = {
 	cmd: new SlashCommandBuilder()
@@ -26,7 +25,7 @@ module.exports = {
             return;
         }
 
-        let warnings = get_warnings(db, guild.id, user.id);
+        let warnings = get_warnings(guild.id, user.id);
 
         let message = warnings.length
                         ? `Warnings for <@${user.id}>\n`
@@ -44,3 +43,4 @@ module.exports = {
 		await interaction.reply({embeds: [embed]});
 	},
 };
+

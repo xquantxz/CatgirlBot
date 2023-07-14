@@ -1,5 +1,7 @@
-import { CommandInteraction, PermissionFlagsBits, SlashCommandBuilder, SlashCommandStringOption, SlashCommandUserOption } from "discord.js"
-import { add_warning, db } from "../database";
+import { CommandInteraction, PermissionFlagsBits, SlashCommandBuilder, SlashCommandStringOption, SlashCommandUserOption } from "discord.js";
+import { add_warning, delete_all_warnings, get_warnings } from "../warning";
+
+const { MAX_WARNINGS } = require('../constant');
 
 module.exports = {
 	cmd: new SlashCommandBuilder()
@@ -51,7 +53,12 @@ module.exports = {
             return;
         }
 
-        add_warning(db, guild.id, admin.id, user.id, reason)
-		await interaction.reply(`<@${user.id}> has been warned\nReason: ${reason}`);
+        if (get_warnings(guild.id, user.id).length >= MAX_WARNINGS) {
+            await member.ban({reason: "Too many warnings"});
+            delete_all_warnings(guild.id, user.id);
+        } else {
+            add_warning(guild.id, admin.id, user.id, reason);
+            await interaction.reply(`<@${user.id}> has been warned\nReason: ${reason}`);
+        }
 	},
 };
